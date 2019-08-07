@@ -1,0 +1,96 @@
+<html><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+<head>
+<script type="text/javascript" src="mraid.js"></script>
+</head>
+<body>
+<div id="normal" style="display:none; margin:auto;top:0px;text-align:center">
+<a onClick="expand();">
+<img width="[%BannerImageWidth%]" height="[%BannerImageHeight%]" src="https://itqmedia.org/assets/online/320_50/Deep-Breath-320x50.png" />
+</a>
+</div>
+<div id="expanded" style="display:none;top:0px;text-align:center">
+<a onClick="openURL()">
+<img width="[%ExpandedImageWidth%]"  height="[%ExpandedImageHeight%]" src="https://monichino.com.au/wp-content/uploads/2017/11/320x480-Placeholder.png" />
+</a>
+</div>
+
+<script>
+<!--
+
+function openURL() {
+  mraid.open("%%CLICK_URL_ESC%%[%ClickThroughURL%]");
+}
+
+// Change background color if present
+function changeBodyElementStyle() {
+  if ("[%BackgroundColor%]") {
+    var bodyElement = document.body;
+    bodyElement.style.backgroundColor = "[%BackgroundColor%]";
+  }
+}       
+
+// Check whether MRAID is ready by adding event listener
+function checkIfReady(){
+  if(mraid.getState() == 'loading'){
+    mraid.addEventListener("ready", mraidIsReady);
+  } else{
+    showMyAd();
+  }
+}
+
+// Once MRAID is ready, it does not need to listen to the ready event anymore
+function mraidIsReady(){
+  mraid.removeEventListener("ready", mraidIsReady); 
+  showMyAd();
+}
+
+function showMyAd(){
+  // Displays the advert
+  var advertElement = document.getElementById("normal");
+  advertElement.style.display = "inline";
+
+  // Add event listener to detect whether to expand or not
+  mraid.addEventListener("stateChange",updateAd); 
+
+  // Change background color of the expanded advert
+  var expandedDiv = document.getElementById("expanded");
+  if ("[%BackgroundColor%]") {
+    expandedDiv.style.backgroundColor = "[%BackgroundColor%]";
+  }
+}
+
+function expand() {
+  if(mraid.getVersion()=="2.0"){
+    mraid.expand();
+    return false;
+  }
+  else {
+    return true;
+  }
+}
+
+// updateAd is called when mraid changes state
+// Calls toggleLayer to expand/ reduce ad size
+function updateAd(state){
+  if (state == "expanded"){
+    toggleLayer('normal', 'expanded');
+  }else if(state == "default"){
+    toggleLayer('expanded', 'normal');
+  }
+}
+
+// Goes to the other state (either expands or banner)
+function toggleLayer(fromLayer, toLayer){
+  var fromLayerElem = document.getElementById(fromLayer);
+  fromLayerElem.style.display = 'none';
+  var toLayerElem = document.getElementById(toLayer);
+  toLayerElem.style.display = "block";
+}
+
+changeBodyElementStyle();
+checkIfReady();
+//-->
+</script>
+</body>
+</html>
